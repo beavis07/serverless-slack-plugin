@@ -86,3 +86,7 @@ serverless endpoint remove
 ```
 
 ![Remove endpoints](https://cloud.githubusercontent.com/assets/8673465/16177668/e8700ac6-362b-11e6-9fc8-8ac404d18b51.jpg)
+
+## License
+
+MIT License. See the [LICENSE](LICENSE) file.
