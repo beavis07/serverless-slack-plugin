@@ -13,7 +13,7 @@ npm install serverless-slack-plugin --save-dev
 
 Add the plugin to the `plugins` array in your Serverless Project's `s-project.json`, like this:
 
-```
+```javascript
 plugins: [
     "serverless-slack-plugin"
 ]
@@ -45,25 +45,39 @@ Once you have generate a token for your bot user and the name of the channel you
     ...
 }
 ```
-*Note: For both ```endpoints``` and ```functions``` you can either enable/disable deployments and removals discretely or globally as above)*
+
+*Note: For both `endpoints` and `functions` you can either enable/disable deployments and removals discretely or globally as above*
 
 ## Usage
 
 Once configured any of the following actions will result in a summary message being sent to the configured channel.
 
 ```
+serverless dash deploy
+```
+
+![Deploy functions](https://cloud.githubusercontent.com/assets/8673465/16177664/e86a0fea-362b-11e6-80e8-a942b3153787.jpg)
+
+```
 serverless function deploy
 ```
+
+![Deploy functions](https://cloud.githubusercontent.com/assets/8673465/16177666/e86ee16e-362b-11e6-9e12-3fbc1dcd8af3.jpg)
 
 ```
 serverless function remove
 ```
+
+![Remove functions](https://cloud.githubusercontent.com/assets/8673465/16177667/e86f48f2-362b-11e6-9952-12cc1ddde689.jpg)
+
 ```
 serverless endpoint deploy
 ```
+
+![Deploy endpoints](https://cloud.githubusercontent.com/assets/8673465/16177665/e86e0000-362b-11e6-8384-d7e324f163d4.jpg)
+
 ```
 serverless endpoint remove
 ```
-```
-serverless dash deploy
-```
+
+![Remove endpoints](https://cloud.githubusercontent.com/assets/8673465/16177668/e8700ac6-362b-11e6-9fc8-8ac404d18b51.jpg)
