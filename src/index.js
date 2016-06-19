@@ -5,9 +5,12 @@ const WebClient = require('@slack/client').WebClient;
 module.exports = function (S) {
 	class ServerlessSlackPlugin extends S.classes.Plugin {
 
+		static getName () {
+			return 'com.beavis07.' + ServerlessSlackPlugin.name;
+		}
+
 		constructor () {
 			super();
-			this.name = 'serverless-slack-plugin';
 		}
 
 		registerHooks () {

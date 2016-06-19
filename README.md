@@ -28,10 +28,9 @@ plugins: [
 
 First you will need to configure a "bot user" in your Slack team for the integration, instructions on how to do that can be found in the [Slack documentation](https://api.slack.com/bot-users).  
 
+*Hint: Don't forget to invite your bot user into the channel you want it to post into!*
 
-Once you have generate a token for your bot user and the name of the channel you want the bot to post to, in the `custom` property of either your `s-project.json` or `s-function.json` add an slack property.
-
-*Hint: Don't forget to invite your bot user into the channel you have specified!*
+Once you have generated a token for your bot user and the name of the channel, in the `custom` property of either your `s-project.json` or `s-function.json` add the following:
 
 ```javascript
 {
@@ -40,7 +39,7 @@ Once you have generate a token for your bot user and the name of the channel you
       "slack": {
         "token": "<YOUR SLACK CHAT BOT TOKEN>",
         "channel": "<THE CHANNEL YOU WANT TO POST TO>",
-        "endpoints": true, // All endpoint deployments and removals will result in a message being posted to the channel
+        "endpoints": true, // All endpoint deployments and removals will result in a message
         "functions": {
           "deployed": true, // Function deployments will result in a message
           "removed": true // Function removals will result in a message
