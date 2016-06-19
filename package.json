@@ -1,0 +1,36 @@
+{
+  "name": "serverless-slack-plugin",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=4.0"
+  },
+  "description": "Serverless slack bot which will update a given channel whenever a deployment is completed",
+  "author": "Peter Bevan<peterbevan.dev@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/beavis07/serverless-slack-plugin#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beavis07/serverless-slack-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beavis07/serverless-slack-plugin/issues"
+  },
+  "keywords": [
+    "serverless framework plugin",
+    "serverless applications",
+    "serverless plugins",
+    "api gateway",
+    "lambda",
+    "aws",
+    "aws lambda",
+    "amazon",
+    "amazon web services",
+    "serverless.com"
+  ],
+  "main": "index.js",
+  "bin": {},
+  "devDependencies": {},
+  "dependencies": {
+    "@slack/client": "^3.5.0"
+  }
+}

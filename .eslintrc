@@ -1,0 +1,56 @@
+
+{
+    "extends": [ "eslint:recommended" ],
+	"parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "impliedStrict": true,
+            "modules": true,
+            "sourceType": "module"
+        },
+        "ecmaVersion": 7
+    },
+	"env": {
+		"es6": true,
+		"node": true,
+		"mocha": true
+	},
+	"globals": {
+        "expect": true,
+		"mockery": true,
+		"sinon": true,
+		"setupTestEnv": true,
+		"getThrowableSpyFn": true,
+		"resetRequireCache": true,
+		"mockData": true
+	},
+	"rules": {
+		"no-console": 0,
+		"array-bracket-spacing": 0,
+		"camelcase": 2,
+		"computed-property-spacing": [ 2, "never" ],
+		"curly": 2,
+		"dot-notation": 2,
+		"eol-last": 2,
+		"eqeqeq": 2,
+		"indent": [ 2, "tab", { "SwitchCase": 1 } ],
+        "keyword-spacing": 0,
+		"max-len": [ 2, 120, 4 ],
+		"new-cap": [ 2, { "capIsNew": false } ],
+		"no-eq-null": 2,
+		"no-mixed-spaces-and-tabs": 2,
+		"no-multiple-empty-lines": [ 2, { "max": 2 } ],
+		"no-trailing-spaces": 2,
+		"no-use-before-define": [ 2, "nofunc" ],
+		"no-undef": 2,
+		"no-unused-vars": 2,
+		"no-var": 2,
+		"no-warning-comments": [1, { "terms": [ "todo", "fixme" ], "location": "anywhere" }],
+		"object-curly-spacing": [ 2, "always" ],
+		"quotes": [ 2, "single" ],
+		"semi": [ 2, "always" ],
+		"space-before-function-paren": [ 2, "always" ],
+		"strict": 0,
+		"vars-on-top": 2
+	}
+}
