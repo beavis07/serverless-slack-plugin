@@ -1,6 +1,6 @@
 Serverless Slack Plugin
 =============================
-A [Slack](https://slack.com) Bot plugin for the [Serverless Framework](http://www.serverless.com) which will post updates to a channel on completion deployments or removals of functions and/or endpoints.
+A [Slack Bot](https://api.slack.com/bot-users) plugin for the [Serverless Framework](http://www.serverless.com) which will post updates to a channel on completion deployments or removals of functions and/or endpoints.
 
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 [![npm version](https://badge.fury.io/js/serverless-slack-plugin.svg)](https://badge.fury.io/js/serverless-slack-plugin)
