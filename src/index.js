@@ -1,6 +1,8 @@
 'use strict';
 
 const WebClient = require('@slack/client').WebClient;
+const MAXIMUM_MESSAGE_LENGTH = 4000;
+const BACKTICK = '```';
 
 module.exports = function (S) {
 	class ServerlessSlackPlugin extends S.classes.Plugin {
@@ -35,22 +37,9 @@ module.exports = function (S) {
 
 		sendMessage (token, channel, message) {
 			const webClient = new WebClient(token);
-			webClient.chat.postMessage(channel, message, { 'as_user': true });
+			return webClient.chat.postMessage(channel, message, { 'as_user': true });
 		}
 
-		generateMessage (action, prep, desc, evt, project, formatFn) {
-			const name = project.name;
-			const stage = evt.options.stage;
-			const region = Object.keys(evt.data[action])[0];
-			const functions = evt.data[action][region];
-
-			const header = `*${name}* just ${action} *${functions.length}* ${desc}` +
-				(functions.length !== 1 ? 's' : '') + ` ${prep} *${stage} (${region})*`;
-
-			const fnText = '```' + functions.map(formatFn).join('\n') + '```';
-
-			return `${header}\n>${fnText}`;
-		}
 
 		handleDeploy (evt, type, prep, action, desc, formatFn) {
 			if (Object.keys(evt.data[action] || {}).length) {
@@ -62,8 +51,8 @@ module.exports = function (S) {
 					(typeof config[type] === 'boolean' && config[type])) &&
 					config.token && config.channel
 				) {
-					const message = this.generateMessage(action, prep, desc, evt, project, formatFn);
-					this.sendMessage(config.token, config.channel, message);
+					const messages = generateMessages(action, prep, desc, evt, project, formatFn);
+					sequenceArray(messages, (message) => this.sendMessage(config.token, config.channel, message));
 				}
 			}
 
@@ -118,3 +107,43 @@ module.exports = function (S) {
 
 	return ServerlessSlackPlugin;
 };
+
+function sequenceArray (array, fn) {
+	let index = 0;
+
+	function next () {
+		if (index < array.length) {
+			fn(array[index++]).then(next);
+		}
+	}
+	next();
+}
+
+function generateMessages (action, prep, desc, evt, project, formatFn) {
+	const name = project.name;
+	const stage = evt.options.stage;
+	const region = Object.keys(evt.data[action])[0];
+	const functions = evt.data[action][region];
+
+	const header = `*${name}* just ${action} *${functions.length}* ${desc}` +
+		(functions.length !== 1 ? 's' : '') + ` ${prep} *${stage} (${region})*`;
+
+	return paginateMessageContent(header, functions, formatFn);
+}
+
+function paginateMessageContent (header, functions, formatFn) {
+	let firstPage = [ header + '\n' + BACKTICK ]; // The header and the opening backticks for the code block
+	const pages = functions.reduce((m, fn) => {
+		const entry = formatFn(fn) + '\n';
+		if (m[m.length - 1].length + entry.length + BACKTICK.length > MAXIMUM_MESSAGE_LENGTH) {
+			m[m.length - 1] += BACKTICK;
+			m.push(BACKTICK + entry);
+		} else {
+			m[m.length - 1] += entry;
+		}
+		return m;
+	}, firstPage);
+
+	pages[pages.length - 1] += BACKTICK;
+	return pages;
+}
