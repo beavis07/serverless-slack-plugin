@@ -1,6 +1,6 @@
 {
   "name": "serverless-slack-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Serverless slack bot which will update a given channel whenever a deployment is completed",
   "author": "Peter Bevan<peterbevan.dev@gmail.com>",
   "license": "MIT",
