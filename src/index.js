@@ -120,12 +120,13 @@ function sequenceArray (array, fn) {
 }
 
 function generateMessages (action, prep, desc, evt, project, formatFn) {
+    const user = process.env.USER || process.env.LOGNAME || process.env.USERNAME || process.env.SUDO_USER || process.env.LNAME || 'maas-developer';
 	const name = project.name;
 	const stage = evt.options.stage;
 	const region = Object.keys(evt.data[action])[0];
 	const functions = evt.data[action][region];
 
-	const header = `*${name}* just ${action} *${functions.length}* ${desc}` +
+	const header = `User *${user}* on *${name}* just ${action} *${functions.length}* ${desc}` +
 		(functions.length !== 1 ? 's' : '') + ` ${prep} *${stage} (${region})*`;
 
 	return paginateMessageContent(header, functions, formatFn);
